@@ -4,8 +4,12 @@ import bcrypt from "bcryptjs";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+
+  
 export const authOptions : NextAuthOptions = {
+ 
 providers: [
+ 
   CredentialsProvider({
    
     name: "credentials",
@@ -14,18 +18,24 @@ providers: [
       email: { label: "Email", type: "text", placeholder: "example@email.com" },
       password: { label: "Password", type: "password" }
     },
-    async authorize(credentials :  any ) : Promise<any> {
+    async authorize(credentials : Record<"email" | "password" , string> | undefined  ) : Promise<any> {
         await dbConnect();
 
         try {
-       const userFound = await UserModel.findOne({email : credentials.email});
+       const userFound = await UserModel.findOne({email : credentials?.email});
        if(userFound){
-            const passwordMatching = await bcrypt.compare(credentials.password , userFound.password);
-            if(passwordMatching){
-              console.log("Password Matched");
-              return userFound;
-            } 
-            throw new Error("Password not matching")
+           if(credentials?.password!=undefined){
+             const passwordMatching = await bcrypt.compare(
+               credentials.password,
+               userFound.password
+             );
+                         if (passwordMatching) {
+                           console.log("Password Matched");
+                           return userFound;
+                         }
+                         throw new Error("Password not matching");
+           }
+
 
        }else {
            throw new Error("User not registered");
