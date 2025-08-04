@@ -7,14 +7,12 @@ import { authOptions } from "../../auth/[...nextauth]/option";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { userId: string } }
+  
 ) {
   await dbConnect();
 
   try {
-    if (!params) {
-      return NextResponse.json({ error: "Missing userId in params" }, { status: 400 });
-    }
+   
       const session = await getServerSession(authOptions);
       if (!session) {
         return NextResponse.json({ error: "User not authenticated" }, { status: 401 });
