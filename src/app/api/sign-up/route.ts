@@ -16,12 +16,11 @@ export async function POST(request : NextRequest){
       try {
         const userEmail= await UserModel.findOne({email : email });
         if(userEmail){
-          if(userEmail.isVerified){
               return Response.json({
                 success: "false",
-                message: "Account is already verified go to log in",
-              });
-          }
+                message: "Account is already registered go to sign in",
+              } , {status : 200});
+          
               //TODO: Email verification setup
         }else {
              const user = await UserModel.create({
@@ -36,7 +35,7 @@ export async function POST(request : NextRequest){
                return Response.json({
                  success: "true",
                  message: "User Successfully signed in",
-               });
+               } , {status : 500});
         }
 
 

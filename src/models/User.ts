@@ -1,5 +1,5 @@
 import mongoose , {Document , Schema} from "mongoose"
-interface Usertype extends Document{
+export interface Usertype extends Document{
     email : string,
     firstname : string,
     lastname : string,

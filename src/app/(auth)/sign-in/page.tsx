@@ -36,7 +36,7 @@ export default function SignIn() {
             console.log("Succesfully logged in");
             router.replace("/")
          }
-         console.log("Some error occured while loggin in");
+         alert("Wrong Username or Password");
       } catch (error) {
         console.log("The  error while logging up is : " , error);
       }

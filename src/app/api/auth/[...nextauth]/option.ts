@@ -1,9 +1,17 @@
+
+
 import dbConnect from "@/lib/dbConnect";
+
 import UserModel from "@/models/User";
 import bcrypt from "bcryptjs";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+
+export type credentialsType = {
+  email: string;
+  password: string;
+};
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -17,26 +25,36 @@ export const authOptions: NextAuthOptions = {
         },
         password: { label: "Password", type: "password" },
       },
-      //eslint-disable-next-line @typescript-eslint/no-explicit-any
-      type : "credentials",
+
+
       async authorize(
         credentials: Record<"email" | "password", string> | undefined
       ): Promise<any> {
         await dbConnect();
 
+        if (!credentials) {
+          return null;
+        }
+
         try {
           const userFound = await UserModel.findOne({
-            email: credentials?.email,
+            email: credentials.email,
           });
           if (userFound) {
-            if (credentials?.password != undefined) {
+            if (credentials.password !== undefined) {
               const passwordMatching = await bcrypt.compare(
                 credentials.password,
                 userFound.password
               );
               if (passwordMatching) {
                 console.log("Password Matched");
-                return userFound;
+                return {
+                  randomId: userFound.randomId?.toString() || "",
+                  email: userFound.email,
+                  firstname: userFound.firstname,
+                  lastname: userFound.lastname,
+                  _id: userFound._id?.toString() || "",
+                };
               }
               throw new Error("Password not matching");
             }
@@ -45,6 +63,7 @@ export const authOptions: NextAuthOptions = {
           }
         } catch (error) {
           console.log("The error in signing up is ", error);
+
           throw new Error("Error in Logging in");
         }
       },

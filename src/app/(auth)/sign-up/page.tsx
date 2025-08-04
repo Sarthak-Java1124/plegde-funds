@@ -28,10 +28,14 @@ type formData = {
   const onSubmit = async (data : formData)=>{
     try {
       const response  = await axios.post("/api/sign-up " , data);
-      if(response.status==200){
+      
+      if(response.data.success==true){
+
         console.log("Huraay Your form has been submitted")
         reset();
         router.replace("/sign-in");
+      }else {
+        alert(response.data.message)
       }
       console.log("The data from the form is : " , response.data);
 
@@ -67,7 +71,7 @@ type formData = {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            Join PledgeIT
+            Join PledgeFunds
           </motion.h1>
           <motion.p
             className="text-gray-600 text-xl leading-relaxed"
@@ -162,7 +166,7 @@ type formData = {
             {/* Login Link */}
             <div className="text-center mt-4">
               <span className="text-gray-600">Already have an account? </span>
-              <a href="/login" className="text-blue-600 hover:text-blue-700 font-medium transition">
+              <a href="/sign-in" className="text-blue-600 hover:text-blue-700 font-medium transition">
                 Sign in
               </a>
             </div>
