@@ -32,11 +32,12 @@ export default function SignIn() {
             password : data.password,
             email : data.email,
          })
-         if(res?.status==200){
+         if(res?.ok==true){
             console.log("Succesfully logged in");
             router.replace("/")
-         }
+         }else{
          alert("Wrong Username or Password");
+         }
       } catch (error) {
         console.log("The  error while logging up is : " , error);
       }
@@ -103,7 +104,7 @@ export default function SignIn() {
               />
             </div>
 
-            {/* Password */}
+            
             <div className="flex flex-col gap-2">
               <label className="text-gray-800 font-medium flex items-center gap-2">
                 <FaLock className="text-blue-500" />
@@ -117,7 +118,7 @@ export default function SignIn() {
               />
             </div>
 
-            {/* Forgot Password Link */}
+            
             <div className="text-right">
               <a
                 href="/forgot-password"
@@ -127,7 +128,7 @@ export default function SignIn() {
               </a>
             </div>
 
-            {/* Submit Button */}
+            
             <motion.button
               type="submit"
               className="mt-4 bg-gradient-to-r from-blue-600 to-purple-500 text-white px-8 py-3 rounded-full font-semibold shadow-md hover:scale-105 hover:shadow-lg transition text-lg backdrop-blur-sm"
@@ -137,7 +138,7 @@ export default function SignIn() {
               Sign In
             </motion.button>
 
-            {/* Sign Up Link */}
+            
             <div className="text-center mt-4">
               <span className="text-gray-600">
                 Don&apos;t have an account?{" "}
