@@ -1,7 +1,6 @@
 "use client"
 import React from "react";
-import { FaWallet, FaTrophy, FaCheckCircle } from "react-icons/fa";
-import { FiTarget } from "react-icons/fi";
+import { FaCheckCircle } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const Features = () => (
@@ -61,7 +60,7 @@ const Features = () => (
           </div>
           <div>
             <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-1">Achieve your goal or lose your stake</h3>
-            <p className="text-gray-600 text-sm sm:text-base">Complete your habit to earn rewards, or lose your tokens if you don't follow through.</p>
+            <p className="text-gray-600 text-sm sm:text-base">Complete your habit to earn rewards, or lose your tokens if you don&apos;t follow through.</p>
           </div>
         </motion.div>
       </div>

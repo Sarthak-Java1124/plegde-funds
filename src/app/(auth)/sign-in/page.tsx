@@ -37,8 +37,8 @@ export default function SignIn() {
           }else{
          alert("Wrong Username or Password");
           }
-             } catch (error) {
-       }
+                                                       } catch {
+        }
     }
     
   return (

@@ -60,7 +60,7 @@ export const authOptions: NextAuthOptions = {
           } else {
             throw new Error("User not registered");
           }
-        } catch (error) {
+        } catch {
           throw new Error("Error in Logging in");
         }
       },

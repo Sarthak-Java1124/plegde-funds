@@ -37,7 +37,7 @@ type formData = {
         alert(response.data.message)
       }
       
-    } catch (error) {
+    } catch {
       
       
     }

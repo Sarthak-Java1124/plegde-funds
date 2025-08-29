@@ -15,8 +15,8 @@ export async function DELETE(request : NextRequest){
            }else {
             return NextResponse.json({message : "The message not found"});
            }
-     }catch(error){
-    
+                       }catch{
+     
      }
 
 }

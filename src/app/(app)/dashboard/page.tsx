@@ -71,12 +71,12 @@ export default  function DashboardPage() {
      
       }
   
-        catch(error){
-           throw new Error("There was a error fetching pledges on the frontend")
+                                   catch{
+             throw new Error("There was a error fetching pledges on the frontend")
 
     }
     
-  }; getPledges() }, [session])
+  }; getPledges() }, [session, messages])
 
   
            const deleteMessage =  async(pledgeNumber : number)=>{
@@ -108,10 +108,10 @@ export default  function DashboardPage() {
             try {
         const connectorWallet = connectors.find((c) => c.id == "injected");
         if (connectorWallet != null) {
-          const response = await connectAsync({ connector: connectorWallet });
+          await connectAsync({ connector: connectorWallet });
         }
       }
-    catch (error) {
+         catch {
     }
    }
 

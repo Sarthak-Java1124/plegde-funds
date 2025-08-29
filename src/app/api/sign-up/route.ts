@@ -39,10 +39,10 @@ export async function POST(request : NextRequest){
         }
 
 
-             }catch(error){
-              return Response.json({
-                success: "false",
-                message: "Error in signing up",
-              });
-       }
+                                                       }catch{
+                return Response.json({
+                  success: "false",
+                  message: "Error in signing up",
+                });
+         }
 }

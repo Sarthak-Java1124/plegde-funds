@@ -40,7 +40,7 @@ export async function POST(request : NextRequest){
         
          
         
-    } catch (error) { 
+    } catch { 
         return NextResponse.json({
           success: false,
           message: "The Pledge Cannot be created",

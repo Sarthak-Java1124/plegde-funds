@@ -89,7 +89,7 @@ if(isConnected){
    
 
 
-   } catch (error) {
+   } catch {
       
    }
 }

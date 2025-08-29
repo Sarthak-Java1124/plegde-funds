@@ -26,8 +26,7 @@ export async function GET(
 
     return NextResponse.json({ findPledge }, { status: 200 });
 
-  } catch (error) {
-    console.error("Error fetching pledges:", error);
+  } catch {
     return NextResponse.json({ error: "Cannot get the pledges" }, { status: 500 });
   }
 }
