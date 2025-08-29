@@ -30,7 +30,7 @@ export default function Section1(){
           Log In
           </button>) : <button
           className="mt-8 bg-blue-600 text-white px-8 py-3 rounded-full font-semibold shadow-md hover:bg-blue-700 transition text-2xl"
-          onClick={() => router.replace("/dashboard")}
+          onClick={() => router.push("/dashboard")}
         >
           Go to Dashboard
           </button>}
