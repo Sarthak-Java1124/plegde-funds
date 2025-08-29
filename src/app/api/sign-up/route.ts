@@ -21,7 +21,7 @@ export async function POST(request : NextRequest){
                 message: "Account is already registered go to sign in",
               } , {status : 200});
           
-              //TODO: Email verification setup
+          
         }else {
              const user = await UserModel.create({
                 email : email ,
@@ -39,11 +39,10 @@ export async function POST(request : NextRequest){
         }
 
 
-      }catch(error){
-           console.log("The error coming in signing up is : " , error);
-             return Response.json({
-               success: "false",
-               message: "Error in signing up",
-             });
-      }
+             }catch(error){
+              return Response.json({
+                success: "false",
+                message: "Error in signing up",
+              });
+       }
 }

@@ -29,44 +29,36 @@ type formData = {
     try {
       const response  = await axios.post("/api/sign-up " , data);
       
-      if(response.data.success==true){
+             if(response.data.success==true){
 
-        console.log("Huraay Your form has been submitted")
-        reset();
-        router.replace("/sign-in");
+         reset();
+         router.replace("/sign-in");
       }else {
         alert(response.data.message)
       }
-      console.log("The data from the form is : " , response.data);
-
-
       
     } catch (error) {
-      console.log("The error on submitting form is : " , error);
       
       
     }
   }
   return (
 
-    <div className="min-h-screen flex justify-center items-center relative overflow-hidden">
-      {/* Background blobs - same as main page */}
-
+    <div className="min-h-screen flex justify-center items-center relative overflow-hidden px-4 py-8">
       <motion.div
-        className="w-full max-w-6xl flex items-center justify-center gap-16 px-8"
+        className="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 px-4 sm:px-8"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        {/* Left Side - Header */}
         <motion.div
-          className="flex-1 max-w-md"
+          className="flex-1 max-w-md text-center lg:text-left"
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <motion.h1
-            className="text-slate-800 font-semibold text-5xl sm:text-6xl mb-4 leading-tight"
+            className="text-slate-800 font-semibold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl mb-4 leading-tight"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -74,7 +66,7 @@ type formData = {
             Join PledgeFunds
           </motion.h1>
           <motion.p
-            className="text-gray-600 text-xl leading-relaxed"
+            className="text-gray-600 text-lg sm:text-xl leading-relaxed"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -83,21 +75,19 @@ type formData = {
           </motion.p>
         </motion.div>
 
-        {/* Right Side - Sign-up Form */}
         <motion.div
-          className="flex-1 max-w-md"
+          className="flex-1 max-w-md w-full"
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
           <motion.form
-            className="glass p-10 rounded-2xl shadow-2xl flex flex-col gap-6"
+            className="glass p-6 sm:p-8 lg:p-10 rounded-2xl shadow-2xl flex flex-col gap-4 sm:gap-6"
             onSubmit={handleSubmit(onSubmit)}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            {/* First Name */}
             <div className="flex flex-col gap-2">
               <label className="text-gray-800 font-medium flex items-center gap-2">
                 <FaUser className="text-blue-500" />
@@ -111,7 +101,6 @@ type formData = {
               />
             </div>
 
-            {/* Last Name */}
             <div className="flex flex-col gap-2">
               <label className="text-gray-800 font-medium flex items-center gap-2">
                 <FaUser className="text-blue-500" />
@@ -125,7 +114,6 @@ type formData = {
               />
             </div>
 
-            {/* Email */}
             <div className="flex flex-col gap-2">
               <label className="text-gray-800 font-medium flex items-center gap-2">
                 <FaEnvelope className="text-blue-500" />
@@ -139,7 +127,6 @@ type formData = {
               />
             </div>
 
-            {/* Password */}
             <div className="flex flex-col gap-2">
               <label className="text-gray-800 font-medium flex items-center gap-2">
                 <FaLock className="text-blue-500" />
@@ -153,17 +140,15 @@ type formData = {
               />
             </div>
 
-            {/* Submit Button */}
             <motion.button
               type="submit"
-              className="mt-4 bg-gradient-to-r from-blue-600 to-purple-500 text-white px-8 py-3 rounded-full font-semibold shadow-md hover:scale-105 hover:shadow-lg transition text-lg backdrop-blur-sm"
+              className="mt-4 bg-gradient-to-r from-blue-600 to-purple-500 text-white px-6 sm:px-8 py-3 rounded-full font-semibold shadow-md hover:scale-105 hover:shadow-lg transition text-base sm:text-lg backdrop-blur-sm w-full sm:w-auto"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
               Create Account
             </motion.button>
 
-            {/* Login Link */}
             <div className="text-center mt-4">
               <span className="text-gray-600">Already have an account? </span>
               <a href="/sign-in" className="text-blue-600 hover:text-blue-700 font-medium transition">

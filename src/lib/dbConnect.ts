@@ -8,7 +8,6 @@ const connection: ConnectionObject = {};
 
 async function dbConnect() {
   if (connection.isConnected) {
-    console.log("The Database is Already Connected");
     return;
   }
 
@@ -24,7 +23,6 @@ async function dbConnect() {
       socketTimeoutMS: 45000,
     });
 
-    console.log("The Database is Connected");
     connection.isConnected = db.connections[0].readyState;
   } catch (error) {
     console.error("Database connection failed:", error);

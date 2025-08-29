@@ -22,7 +22,6 @@ export async function GET(
     const findPledge = await PledgeModel.find({ userId }).sort({ createdAt: -1 });
 
     if (!findPledge || findPledge.length === 0) {
-      console.log("No pledges found for this user.");
     }
 
     return NextResponse.json({ findPledge }, { status: 200 });

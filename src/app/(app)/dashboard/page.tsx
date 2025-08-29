@@ -29,7 +29,6 @@ export default  function DashboardPage() {
   const [number , setNumber] = useState(0);
   const [messages , setMessages] = useState<Pledge[]>([]);
   if(!session?.user._id){
-    console.log("No Session Id found");
   }
 
     useEffect(()=>{
@@ -38,9 +37,8 @@ export default  function DashboardPage() {
         try{
      if(session?.user._id){
       const response = await axios.get(`/api/get-pledges/${session.user.randomId}`);
-      if(response.status==200){
-        console.log("The Response data from the get pledges is : " , response.data);
-         setMessages(response.data.findPledge.filter((item : Pledge)=>{
+             if(response.status==200){
+          setMessages(response.data.findPledge.filter((item : Pledge)=>{
               const itemDate = new Date(item.endTime);
               const today = new Date();
 
@@ -52,15 +50,12 @@ export default  function DashboardPage() {
               const todayMonth = today.getMonth();
               const todayDay = today.getDate();
 
-              // Manual date comparison
               if (itemYear > todayYear) return true;
               if (itemYear < todayYear) return false;
 
-              // Same year
               if (itemMonth > todayMonth) return true;
               if (itemMonth < todayMonth) return false;
 
-              // Same year and month
               return itemDay > todayDay;
          }));
       }else {
@@ -71,15 +66,13 @@ export default  function DashboardPage() {
          sum = sum + messages[i].stakeAmount;
              setNumber(sum);
       }
-     }else{
-      console.log("No id for the session found");
-     }
+           }else{
+      }
      
       }
   
-    catch(error){
-          console.log("The problem fetching pledge on the frontend is : " , error);
-          throw new Error("There was a error fetching pledges on the frontend")
+        catch(error){
+           throw new Error("There was a error fetching pledges on the frontend")
 
     }
     
@@ -116,29 +109,24 @@ export default  function DashboardPage() {
         const connectorWallet = connectors.find((c) => c.id == "injected");
         if (connectorWallet != null) {
           const response = await connectAsync({ connector: connectorWallet });
-          
-          console.log("The wallet is connected", response.accounts);
         }
       }
     catch (error) {
-      console.log("The error is : ", error);
     }
    }
 
   return (
     <motion.div
-      className="min-h-screen bg-gradient-to-br from-blue-100 via-purple-50 to-purple-200 px-4 py-8"
+      className="min-h-screen bg-gradient-to-br from-blue-100 via-purple-50 to-purple-200 px-4 py-4 sm:py-8"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.7 }}
       style={{ backgroundImage: "url(/bg-to-use.jpg)" }}
     >
-      {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-8 md:gap-0">
-        {/* Left: Welcome + Stats */}
-        <div className="flex flex-col gap-6 w-full md:w-auto">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-8 sm:mb-12 gap-6 sm:gap-8 md:gap-0">
+        <div className="flex flex-col gap-4 sm:gap-6 w-full md:w-auto">
           <motion.h1
-            className="text-3xl sm:text-4xl font-bold text-gray-800"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 text-center md:text-left"
             initial={{ x: -40, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.7 }}
@@ -146,37 +134,36 @@ export default  function DashboardPage() {
             Welcome,{" "}
             <span className="text-blue-600">{session?.user.firstname}</span>
           </motion.h1>
-          <div className="flex gap-4 flex-wrap">
-            <div className="bg-white/90 rounded-xl shadow-md px-6 py-4 flex items-center gap-3 min-w-[140px]">
-              <FaWallet className="text-blue-500 text-2xl" />
+          <div className="flex gap-3 sm:gap-4 flex-wrap justify-center md:justify-start">
+            <div className="bg-white/90 rounded-xl shadow-md px-4 sm:px-6 py-3 sm:py-4 flex items-center gap-2 sm:gap-3 min-w-[120px] sm:min-w-[140px]">
+              <FaWallet className="text-blue-500 text-xl sm:text-2xl" />
               <div>
                 <span className="text-gray-500 text-xs">Total Pledges</span>
-                <div className="text-lg font-bold text-blue-600">
+                <div className="text-base sm:text-lg font-bold text-blue-600">
                   {messages.length}
                 </div>
               </div>
             </div>
-            <div className="bg-white/90 rounded-xl shadow-md px-6 py-4 flex items-center gap-3 min-w-[140px]">
-              <FaCheckCircle className="text-green-500 text-2xl" />
+            <div className="bg-white/90 rounded-xl shadow-md px-4 sm:px-6 py-3 sm:py-4 flex items-center gap-2 sm:gap-3 min-w-[120px] sm:min-w-[140px]">
+              <FaCheckCircle className="text-green-500 text-xl sm:text-2xl" />
               <div>
                 <span className="text-gray-500 text-xs">Complete</span>
-                <div className="text-lg font-bold text-green-600">
+                <div className="text-base sm:text-lg font-bold text-green-600">
                   {isCompleted.length}
                 </div>
               </div>
             </div>
-            <div className="bg-white/90 rounded-xl shadow-md px-6 py-4 flex items-center gap-3 min-w-[140px]">
-              <FaCoins className="text-purple-500 text-2xl" />
+            <div className="bg-white/90 rounded-xl shadow-md px-4 sm:px-6 py-3 sm:py-4 flex items-center gap-2 sm:gap-3 min-w-[120px] sm:min-w-[140px]">
+              <FaCoins className="text-purple-500 text-xl sm:text-2xl" />
               <div>
                 <span className="text-gray-500 text-xs">Total Staked</span>
-                <div className="text-lg font-bold text-purple-600">
+                <div className="text-base sm:text-lg font-bold text-purple-600">
                   {number}
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {/* Right: Wallet/Logout Buttons */}
         <div className="flex flex-col items-center gap-3 w-full md:w-auto">
           {!address ? (
             <>
@@ -232,13 +219,11 @@ export default  function DashboardPage() {
           </motion.button>
         </div>
       </div>
-      {/* Section Heading */}
-      <h2 className="text-2xl font-semibold text-gray-700 mb-6 mt-2 text-center md:text-left">
+      <h2 className="text-xl sm:text-2xl font-semibold text-gray-700 mb-4 sm:mb-6 mt-2 text-center md:text-left">
         Your Pledges
       </h2>
-      {/* Pledge Cards */}
       <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
         initial="hidden"
         animate="visible"
         variants={{
@@ -255,7 +240,7 @@ export default  function DashboardPage() {
             {messages.map((pledge, idx) => (
               <motion.div
                 key={idx}
-                className="bg-white/95 rounded-2xl shadow-lg p-6 flex flex-col gap-4 border border-gray-100 hover:scale-105 hover:shadow-xl transition min-h-[210px]"
+                className="bg-white/95 rounded-2xl shadow-lg p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 border border-gray-100 hover:scale-105 hover:shadow-xl transition min-h-[180px] sm:min-h-[210px]"
                 whileHover={{ scale: 1.04 }}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -273,7 +258,7 @@ export default  function DashboardPage() {
                     ${pledge.stakeAmount}
                   </span>
                 </div>
-                <div className="text-lg font-semibold text-gray-800 mb-2">
+                <div className="text-base sm:text-lg font-semibold text-gray-800 mb-2">
                   {pledge.habbitName}
                 </div>
                 <div className="flex-1 flex items-end">
@@ -284,7 +269,7 @@ export default  function DashboardPage() {
                         boxShadow: "0 6px 32px 0 rgba(251,191,36,0.18)",
                       }}
                       whileTap={{ scale: 0.96 }}
-                      className="flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-amber-500 px-6 py-3 rounded-2xl font-bold text-white shadow-lg hover:from-yellow-500 hover:to-amber-600 transition-all duration-200 border-2 border-transparent hover:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-300 text-lg w-full"
+                      className="flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-amber-500 px-4 sm:px-6 py-3 rounded-2xl font-bold text-white shadow-lg hover:from-yellow-500 hover:to-amber-600 transition-all duration-200 border-2 border-transparent hover:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-300 text-base sm:text-lg w-full"
                       onClick={async () => {
                         const response = await writeContractAsync({
                           abi: abi,
@@ -311,7 +296,7 @@ export default  function DashboardPage() {
                         boxShadow: "0 6px 32px 0 rgba(34,197,94,0.18)",
                       }}
                       whileTap={{ scale: 0.96 }}
-                      className="flex items-center gap-2 bg-gradient-to-r from-green-400 to-green-600 px-6 py-3 rounded-2xl font-bold text-white shadow-lg hover:from-green-500 hover:to-green-700 transition-all duration-200 border-2 border-transparent hover:border-green-300 focus:outline-none focus:ring-2 focus:ring-green-300 text-lg w-full"
+                      className="flex items-center gap-2 bg-gradient-to-r from-green-400 to-green-600 px-4 sm:px-6 py-3 rounded-2xl font-bold text-white shadow-lg hover:from-green-500 hover:to-green-700 transition-all duration-200 border-2 border-transparent hover:border-green-300 focus:outline-none focus:ring-2 focus:ring-green-300 text-base sm:text-lg w-full"
                       onClick={() => {
                         const date = new Date().toISOString().slice(0, 10);
                         const year = new Date().toISOString().slice(0, 7);

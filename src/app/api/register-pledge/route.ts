@@ -8,8 +8,7 @@ import { authOptions } from "../auth/[...nextauth]/option";
 export async function POST(request : NextRequest){
     await dbConnect();
  
-const session = await getServerSession(authOptions);
-console.log("The session showing on the backend is : " , session);
+  const session = await getServerSession(authOptions);
     try {
         const {
           habbitName,
@@ -42,8 +41,6 @@ console.log("The session showing on the backend is : " , session);
          
         
     } catch (error) { 
-      console.log("The error in creating the pledge is : " , error);
-        
         return NextResponse.json({
           success: false,
           message: "The Pledge Cannot be created",

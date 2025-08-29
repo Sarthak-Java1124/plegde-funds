@@ -47,7 +47,6 @@ export const authOptions: NextAuthOptions = {
                 userFound.password
               );
               if (passwordMatching) {
-                console.log("Password Matched");
                 return {
                   randomId: userFound.randomId?.toString() || "",
                   email: userFound.email,
@@ -62,8 +61,6 @@ export const authOptions: NextAuthOptions = {
             throw new Error("User not registered");
           }
         } catch (error) {
-          console.log("The error in signing up is ", error);
-
           throw new Error("Error in Logging in");
         }
       },
@@ -102,5 +99,5 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
 
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET || "your-fallback-secret-key-here",
 };
